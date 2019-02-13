@@ -24,14 +24,16 @@ void terminal_initialize(void)
 
 void terminal_clear(void)
 {
-/*  size_t buffer_size = VGA_HEIGHT * VGA_WIDTH * 2;
-  memset(terminal_buffer, vga_entry_color(VGA_COLOR_LIGHT_GREEN,VGA_COLOR_MAGENTA),buffer_size);
-  memset(terminal_buffer+1, 'A',buffer_size);*/
   for (size_t y = 0; y < VGA_HEIGHT; y++) {
-    for (size_t x = 0; x < VGA_WIDTH; x++) {
-      const size_t index = y * VGA_WIDTH + x;
-      terminal_buffer[index] = vga_entry(' ', terminal_color);
-    }
+		terminal_clearline(y);
+  }
+}
+
+void terminal_clearline(size_t row)
+{
+  for (size_t x = 0; x < VGA_WIDTH; x++) {
+    const size_t index = row * VGA_WIDTH + x;
+    terminal_buffer[index] = vga_entry(' ', terminal_color);
   }
 }
 
@@ -57,12 +59,7 @@ void terminal_setcursor(size_t x, size_t y)
 
 void terminal_updatehardcursor(void)
 {
-  size_t temp;
-
-  /* The equation for finding the index in a linear
-  *  chunk of memory can be represented by:
-  *  Index = [(y * width) + x] */
-  temp = terminal_row * 80 + terminal_column;
+  const size_t index = terminal_row * VGA_WIDTH + terminal_column;
 
   /* This sends a command to indicies 14 and 15 in the
   *  CRT Control Register of the VGA controller. These
@@ -72,9 +69,9 @@ void terminal_updatehardcursor(void)
   *  programming documents. A great start to graphics:
   *  http://www.brackeen.com/home/vga */
   outb(0x3D4, 14);
-  outb(0x3D5, temp >> 8);
+  outb(0x3D5, index >> 8);
   outb(0x3D4, 15);
-  outb(0x3D5, temp);
+  outb(0x3D5, index);
 }
 
 void terminal_newline(void)
@@ -84,19 +81,14 @@ void terminal_newline(void)
     terminal_scroll();
   }
   terminal_column = 0;
+	terminal_updatehardcursor();
 }
 
 void terminal_scroll(void)
 {
-  for (size_t y = 1; y < VGA_HEIGHT; y++) {
-		const size_t index_src = y * VGA_WIDTH;
-		const size_t index_dst = index_src - VGA_WIDTH;
-		memcpy(terminal_buffer + index_dst, terminal_buffer + index_src, VGA_WIDTH*2);
-  }
-	for (size_t x = 0; x < VGA_WIDTH; x++) {
-		const size_t index = VGA_WIDTH * (VGA_HEIGHT - 1) + x;
-		terminal_buffer[index] = vga_entry(' ', terminal_color);
-	}
+	memcpy(terminal_buffer, terminal_buffer + VGA_WIDTH, (VGA_HEIGHT - 1) * VGA_WIDTH * 2);
+
+	terminal_clearline(VGA_HEIGHT - 1);
 }
 
 void terminal_setcolor(uint8_t color) {
@@ -122,8 +114,8 @@ void terminal_putchar(char c) {
 		    terminal_scroll();
 		  }
   	}
+		terminal_updatehardcursor();
   }
-	terminal_updatehardcursor();
 }
 
 void terminal_write(const char* data, size_t size) {

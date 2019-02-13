@@ -71,17 +71,26 @@ void irq_install()
 }
 
 void irq0_handler(void) {
-  terminal_writestring("lolo");
+  terminal_writestring(".");
   outb(0x20, 0x20); //EOI
 }
 
 void irq1_handler(void) {
-  terminal_writestring("lolo");
-  outb(0x20, 0x20); //EOI
+  unsigned char status;
+  signed char keycode;
+
+  /* Acknowledgment */
+  status = inb(0x64);
+  /* Lowest bit of status will be set if buffer is not empty */
+  if (status & 0x01) {
+    keycode = inb(0x60);
+    terminal_writestring("key");
+  }
+  
+  outb(0x20, 0x20);
 }
 
 void irq2_handler(void) {
-  terminal_writestring("lolo");
   outb(0x20, 0x20); //EOI
 }
 
