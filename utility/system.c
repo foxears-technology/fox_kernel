@@ -21,14 +21,14 @@ size_t strlen(const char* str) {
 		len++;
 	return len;
 }
-/*
-unsigned char inportb (size_t _port)
+
+uint8_t inb (uint16_t port)
 {
-    unsigned char rv;
-    asm volatile ("inb %1, %0" : "=a" (rv) : "dN" (_port));
+    uint8_t rv;
+    asm volatile ("inb %1, %0" : "=a" (rv) : "dN" (port));
     return rv;
 }
-*/
+
 void outb (uint16_t port, uint8_t val)
 {
   asm volatile ( "outb %0, %1" : : "a"(val), "Nd"(port) );

@@ -7,6 +7,7 @@
 extern void terminal_initialize(void);
 
 extern void terminal_clear(void);
+extern void terminal_clearline(size_t row);
 extern void terminal_reset(void);
 
 extern void terminal_setcursor(size_t x, size_t y);

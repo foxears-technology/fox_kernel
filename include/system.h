@@ -9,7 +9,7 @@ extern void* memset(void* bufptr, int value, size_t size);
 
 extern size_t strlen(const char* str);
 
-//extern unsigned char inportb (size_t _port);
+extern uint8_t inb (uint16_t port);
 extern void outb (uint16_t port, uint8_t val);
 
 #endif /* __SYSTEM_H */
