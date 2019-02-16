@@ -2,7 +2,7 @@
 
 #include <idt.h>
 #include <system.h>
-#include <terminal.h>
+#include <virtualterminal.h>
 
 /* These are own ISRs that point to our special IRQ handler
 *  instead of the regular 'fault_handler' function */
@@ -70,8 +70,19 @@ void irq_install()
   idt_set_gate(47, (uint32_t)irq15, 0x08, 0x8E);
 }
 
+int volatile count = 0;
+
 void irq0_handler(void) {
-  terminal_writestring(".");
+  count++;
+  if(count == 30) {
+    virtualterminal_setcurrent(2);
+  }
+  if(count == 60) {
+    virtualterminal_setcurrent(0);
+    virtualterminal_display(0);
+  }
+  virtualterminal_writestring(2, ".");
+  virtualterminal_display(2);
   outb(0x20, 0x20); //EOI
 }
 
@@ -84,9 +95,10 @@ void irq1_handler(void) {
   /* Lowest bit of status will be set if buffer is not empty */
   if (status & 0x01) {
     keycode = inb(0x60);
-    terminal_writestring("key");
+    virtualterminal_writestring(2, "key");
+    virtualterminal_display(2);
   }
-  
+
   outb(0x20, 0x20);
 }
 
