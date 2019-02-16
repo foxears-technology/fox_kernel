@@ -97,6 +97,12 @@ void irq1_handler(void) {
     keycode = inb(0x60);
     virtualterminal_writestring(2, "key");
     virtualterminal_display(2);
+
+    if(keycode == 38) { /* key l */
+      virtualterminal_deccurrent();
+    } else if (keycode == 39) { /* key m */
+      virtualterminal_inccurrent();
+    }
   }
 
   outb(0x20, 0x20);

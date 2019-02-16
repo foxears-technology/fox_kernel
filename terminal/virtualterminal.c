@@ -91,9 +91,25 @@ void virtualterminal_display(size_t vterm)
     memcpy(
       VGA_MEMORY,
       virtualterminals[vterm].buffer,
-      VGA_LENGTH
+      VGA_LENGTH * 2
     );
   }
+}
+
+void virtualterminal_inccurrent(void)
+{
+  if(++virtualterminal_current >= VIRTUALTERMINALS_LENGTH) {
+    virtualterminal_current = VIRTUALTERMINALS_LENGTH - 1;
+  }
+  virtualterminal_display(virtualterminal_current);
+}
+
+void virtualterminal_deccurrent(void)
+{
+  if(--virtualterminal_current == (size_t)-1) {
+    virtualterminal_current = 0;
+  }
+  virtualterminal_display(virtualterminal_current);
 }
 
 void virtualterminal_setcurrent(size_t vterm)
