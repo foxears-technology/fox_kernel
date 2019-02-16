@@ -24,6 +24,9 @@ int kernel_main()
   virtualterminal_writestring(0, " v0.0.1 C edition \n");
   virtualterminal_display(0);
 
+//  virtualterminal_setcurrent(2);
+  virtualterminal_display(2);
+
   while(1) {
     asm volatile ("hlt");
   }

@@ -6,12 +6,15 @@
 /*
 provide multiple terminals
 */
+
 /*
 should have keyboard shortcut + dynamic mem allocation
 */
+
 /*
-0: kernel logger
-1: main view + splash
+0: main view + splash
+1: kernel logger
+2: interrupt print
 ...
 */
 
