@@ -78,7 +78,19 @@ void virtualterminal_setcursor(size_t vterm, size_t x, size_t y)
 	virtualterminal_updatehardcursor(vterm);
 }
 
-void virtualterminal_updatehardcursor(size_t vterm) {}
+void virtualterminal_updatehardcursor(size_t vterm)
+{
+  if(vterm == virtualterminal_current) {
+    const size_t index =
+      virtualterminals[vterm].row * VGA_WIDTH +
+      virtualterminals[vterm].column;
+
+    outb(0x3D4, 14);
+    outb(0x3D5, index >> 8);
+    outb(0x3D4, 15);
+    outb(0x3D5, index);
+  }
+}
 
 void virtualterminal_setcolor(size_t vterm, uint8_t color)
 {
@@ -102,6 +114,7 @@ void virtualterminal_inccurrent(void)
     virtualterminal_current = VIRTUALTERMINALS_LENGTH - 1;
   }
   virtualterminal_display(virtualterminal_current);
+  virtualterminal_updatehardcursor(virtualterminal_current);
 }
 
 void virtualterminal_deccurrent(void)
@@ -110,12 +123,14 @@ void virtualterminal_deccurrent(void)
     virtualterminal_current = 0;
   }
   virtualterminal_display(virtualterminal_current);
+  virtualterminal_updatehardcursor(virtualterminal_current);
 }
 
 void virtualterminal_setcurrent(size_t vterm)
 {
   if(vterm < VIRTUALTERMINALS_LENGTH) {
     virtualterminal_current = vterm;
+    virtualterminal_updatehardcursor(vterm);
   }
 }
 
