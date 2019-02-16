@@ -95,8 +95,14 @@ void irq1_handler(void) {
   /* Lowest bit of status will be set if buffer is not empty */
   if (status & 0x01) {
     keycode = inb(0x60);
-    virtualterminal_writestring(2, "key");
-    virtualterminal_display(2);
+    /* highest bit set == key released */
+    if(keycode & 0x80) {
+      virtualterminal_writestring(2, "key_released");
+      virtualterminal_display(2);
+    } else {
+      virtualterminal_writestring(2, "key_pressed");
+      virtualterminal_display(2);
+    }
 
     if(keycode == 38) { /* key l */
       virtualterminal_deccurrent();

@@ -4,6 +4,11 @@
 #include <vga.h>
 
 /*
+  #TODO  provide virtual buffer and dont force cpy on VGA_MEMORY
+  only cpy during swap between vterm
+*/
+
+/*
 provide multiple terminals
 */
 
@@ -67,6 +72,15 @@ void virtualterminal_reset(size_t vterm)
   virtualterminal_clear(vterm);
 }
 
+size_t virtualterminal_getindex(size_t vterm)
+{
+  const size_t index =
+    virtualterminals[vterm].row * VGA_WIDTH +
+    virtualterminals[vterm].column;
+
+  return index;
+}
+
 void virtualterminal_setcursor(size_t vterm, size_t x, size_t y)
 {
   if(x < VGA_WIDTH) {
@@ -81,9 +95,7 @@ void virtualterminal_setcursor(size_t vterm, size_t x, size_t y)
 void virtualterminal_updatehardcursor(size_t vterm)
 {
   if(vterm == virtualterminal_current) {
-    const size_t index =
-      virtualterminals[vterm].row * VGA_WIDTH +
-      virtualterminals[vterm].column;
+    const size_t index = virtualterminal_getindex(vterm);
 
     outb(0x3D4, 14);
     outb(0x3D5, index >> 8);
@@ -157,9 +169,8 @@ void virtualterminal_scroll(size_t vterm)
 
 void virtualterminal_putentryat(size_t vterm, unsigned char c)
 {
-	const size_t index =
-    virtualterminals[vterm].row * VGA_WIDTH +
-    virtualterminals[vterm].column;
+	const size_t index = virtualterminal_getindex(vterm);
+
 	virtualterminals[vterm].buffer[index] = vga_entry(c, virtualterminals[vterm].color);
 }
 
