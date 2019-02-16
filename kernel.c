@@ -7,10 +7,12 @@ int kernel_main()
 {
   virtualterminal_initialize();
   terminal_initialize();
+  virtualterminal_writestring(1, "virtual terminals initialized\n");
+  virtualterminal_display(1);
 
   idt_install();
-  virtualterminal_writestring(0, "IDT installed\n");
-  virtualterminal_display(0);
+  virtualterminal_writestring(1, "IDT installed\n");
+  virtualterminal_display(1);
 
   virtualterminal_writestring(0, "Hello World!\n");
   virtualterminal_newline(0);
@@ -23,9 +25,6 @@ int kernel_main()
   virtualterminal_setcursor(0, 7,12);
   virtualterminal_writestring(0, " v0.0.1 C edition \n");
   virtualterminal_display(0);
-
-//  virtualterminal_setcurrent(2);
-  virtualterminal_display(2);
 
   while(1) {
     asm volatile ("hlt");

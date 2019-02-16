@@ -15,6 +15,9 @@ extern void virtualterminal_updatehardcursor(size_t vterm);
 extern void virtualterminal_setcolor(size_t vterm, uint8_t color);
 
 extern void virtualterminal_display(size_t vterm);
+
+extern void virtualterminal_inccurrent(void);
+extern void virtualterminal_deccurrent(void);
 extern void virtualterminal_setcurrent(size_t vterm);
 
 extern void virtualterminal_newline(size_t vterm);
