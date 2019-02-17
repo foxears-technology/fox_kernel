@@ -5,11 +5,6 @@
 #include <vga.h>
 
 /*
-  #TODO  provide virtual buffer and dont force cpy on VGA_MEMORY
-  only cpy during swap between vterm
-*/
-
-/*
 provide multiple terminals
 */
 
@@ -45,6 +40,7 @@ void virtualterminal_initialize(void)
     virtualterminals[i].buffer = get_buffer_ptr(i);
     virtualterminal_clear(i);
   }
+  /* init VGA memory */
   virtualterminals[virtualterminal_current].buffer = VGA_MEMORY;
   virtualterminal_updatehardcursor(virtualterminal_current);
   virtualterminal_clear(virtualterminal_current);
