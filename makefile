@@ -10,6 +10,7 @@ DIR_GDT = ./gdt/
 DIR_IDT = ./idt/
 DIR_IRQ = ./irq/
 DIR_ISR = ./isr/
+DIR_KEYBOARD = ./keyboard/
 DIR_UTILITY = ./utility/
 DIR_TERMINAL = ./terminal/
 DIR_TIMER = ./timer/
@@ -24,6 +25,7 @@ OBJ = \
 	$(DIR_IRQ)irqs.o \
 	$(DIR_ISR)isr.o \
 	$(DIR_ISR)isrs.o \
+	$(DIR_KEYBOARD)keyboard.o \
 	$(DIR_UTILITY)system.o \
 	$(DIR_TERMINAL)terminal_buffer.o \
 	$(DIR_TERMINAL)virtualterminal.o \

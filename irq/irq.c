@@ -1,6 +1,7 @@
 #include <irq.h>
 
 #include <idt.h>
+#include <keyboard.h>
 #include <system.h>
 #include <virtualterminal.h>
 
@@ -93,12 +94,8 @@ void irq1_handler(void) {
   /* Lowest bit of status will be set if buffer is not empty */
   if (status & 0x01) {
     keycode = inb(0x60);
-    /* highest bit set == key released */
-    if(keycode & 0x80) {
-      virtualterminal_writestring(2, "key_released");
-    } else {
-      virtualterminal_writestring(2, "key_pressed");
-    }
+
+    keyboard_handler(keycode);
 
     if(keycode == 38) { /* key l */
       virtualterminal_deccurrent();
