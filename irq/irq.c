@@ -79,10 +79,8 @@ void irq0_handler(void) {
   }
   if(count == 60) {
     virtualterminal_setcurrent(0);
-    virtualterminal_display(0);
   }
   virtualterminal_writestring(2, ".");
-  virtualterminal_display(2);
   outb(0x20, 0x20); //EOI
 }
 
@@ -98,10 +96,8 @@ void irq1_handler(void) {
     /* highest bit set == key released */
     if(keycode & 0x80) {
       virtualterminal_writestring(2, "key_released");
-      virtualterminal_display(2);
     } else {
       virtualterminal_writestring(2, "key_pressed");
-      virtualterminal_display(2);
     }
 
     if(keycode == 38) { /* key l */

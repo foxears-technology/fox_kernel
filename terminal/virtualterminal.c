@@ -1,6 +1,7 @@
 #include <virtualterminal.h>
 
 #include <system.h>
+#include <terminal_buffer.h>
 #include <vga.h>
 
 /*
@@ -23,17 +24,15 @@ should have keyboard shortcut + dynamic mem allocation
 ...
 */
 
-#define VIRTUALTERMINALS_LENGTH (3)
-
 struct virtualterminal
 {
   size_t row;
   size_t column;
   uint8_t color;
-  uint16_t buffer[VGA_LENGTH];
+  uint16_t* buffer;
 };
 
-struct virtualterminal virtualterminals[VIRTUALTERMINALS_LENGTH];
+static struct virtualterminal virtualterminals[VIRTUALTERMINALS_LENGTH];
 
 static size_t virtualterminal_current = 0;
 
@@ -43,9 +42,12 @@ void virtualterminal_initialize(void)
     virtualterminals[i].row = 0;
     virtualterminals[i].column = 0;
     virtualterminals[i].color = vga_entry_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
-    virtualterminal_updatehardcursor(i);
+    virtualterminals[i].buffer = get_buffer_ptr(i);
     virtualterminal_clear(i);
   }
+  virtualterminals[virtualterminal_current].buffer = VGA_MEMORY;
+  virtualterminal_updatehardcursor(virtualterminal_current);
+  virtualterminal_clear(virtualterminal_current);
 }
 
 void virtualterminal_clear(size_t vterm)
@@ -109,39 +111,51 @@ void virtualterminal_setcolor(size_t vterm, uint8_t color)
   virtualterminals[vterm].color = color;
 }
 
-void virtualterminal_display(size_t vterm)
+void virtualterminal_swapbuffer(size_t oldvterm)
 {
-  if(vterm == virtualterminal_current) {
-    memcpy(
-      VGA_MEMORY,
-      virtualterminals[vterm].buffer,
-      VGA_LENGTH * 2
-    );
-  }
+  /* save current terminal state */
+  virtualterminals[oldvterm].buffer = get_buffer_ptr(oldvterm);
+  memcpy(
+    virtualterminals[oldvterm].buffer,
+    VGA_MEMORY,
+    VGA_LENGTH * 2
+  );
+
+  /* push new state */
+  memcpy(
+    VGA_MEMORY,
+    virtualterminals[virtualterminal_current].buffer,
+    VGA_LENGTH * 2
+  );
+  virtualterminals[virtualterminal_current].buffer = VGA_MEMORY;
 }
 
 void virtualterminal_inccurrent(void)
 {
+  size_t current  = virtualterminal_current;
   if(++virtualterminal_current >= VIRTUALTERMINALS_LENGTH) {
     virtualterminal_current = VIRTUALTERMINALS_LENGTH - 1;
   }
-  virtualterminal_display(virtualterminal_current);
+  virtualterminal_swapbuffer(current);
   virtualterminal_updatehardcursor(virtualterminal_current);
 }
 
 void virtualterminal_deccurrent(void)
 {
+  size_t current  = virtualterminal_current;
   if(--virtualterminal_current == (size_t)-1) {
     virtualterminal_current = 0;
   }
-  virtualterminal_display(virtualterminal_current);
+  virtualterminal_swapbuffer(current);
   virtualterminal_updatehardcursor(virtualterminal_current);
 }
 
 void virtualterminal_setcurrent(size_t vterm)
 {
+  size_t current  = virtualterminal_current;
   if(vterm < VIRTUALTERMINALS_LENGTH) {
     virtualterminal_current = vterm;
+    virtualterminal_swapbuffer(current);
     virtualterminal_updatehardcursor(vterm);
   }
 }
