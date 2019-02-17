@@ -2,7 +2,7 @@
 
 #include <idt.h>
 #include <stdint.h>
-#include <terminal.h>
+#include <virtualterminal.h>
 
 /* These are function prototypes for all of the exception
 *  handlers: The first 32 entries in the IDT are reserved
@@ -126,225 +126,225 @@ static const char *exception_messages[] =
 };
 
 void isr0_handler(void) {
-  terminal_writestring(exception_messages[0]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[0]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr1_handler(void) {
-  terminal_writestring(exception_messages[1]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[1]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr2_handler(void) {
-  terminal_writestring(exception_messages[2]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[2]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr3_handler(void) {
-  terminal_writestring(exception_messages[3]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[3]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr4_handler(void) {
-  terminal_writestring(exception_messages[4]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[4]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr5_handler(void) {
-  terminal_writestring(exception_messages[5]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[5]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr6_handler(void) {
-  terminal_writestring(exception_messages[6]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[6]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr7_handler(void) {
-  terminal_writestring(exception_messages[7]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[7]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr8_handler(void) {
-  terminal_writestring(exception_messages[8]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[8]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr9_handler(void) {
-  terminal_writestring(exception_messages[9]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[9]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr10_handler(void) {
-  terminal_writestring(exception_messages[10]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[10]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr11_handler(void) {
-  terminal_writestring(exception_messages[11]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[11]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr12_handler(void) {
-  terminal_writestring(exception_messages[12]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[12]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr13_handler(void) {
-  terminal_writestring(exception_messages[13]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[13]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr14_handler(unsigned long cr2) {
-  terminal_writestring(exception_messages[14]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[14]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr15_handler(void) {
-  terminal_writestring(exception_messages[15]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[15]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr16_handler(void) {
-  terminal_writestring(exception_messages[16]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[16]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr17_handler(void) {
-  terminal_writestring(exception_messages[17]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[17]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr18_handler(void) {
-  terminal_writestring(exception_messages[18]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[18]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr19_handler(void) {
-  terminal_writestring(exception_messages[19]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[19]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr20_handler(void) {
-  terminal_writestring(exception_messages[20]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[20]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr21_handler(void) {
-  terminal_writestring(exception_messages[21]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[21]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr22_handler(void) {
-  terminal_writestring(exception_messages[22]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[22]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr23_handler(void) {
-  terminal_writestring(exception_messages[23]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[23]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr24_handler(void) {
-  terminal_writestring(exception_messages[24]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[24]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr25_handler(void) {
-  terminal_writestring(exception_messages[25]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[25]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr26_handler(void) {
-  terminal_writestring(exception_messages[26]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[26]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr27_handler(void) {
-  terminal_writestring(exception_messages[27]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[27]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr28_handler(void) {
-  terminal_writestring(exception_messages[28]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[28]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr29_handler(void) {
-  terminal_writestring(exception_messages[29]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[29]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr30_handler(void) {
-  terminal_writestring(exception_messages[30]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[30]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
 
 void isr31_handler(void) {
-  terminal_writestring(exception_messages[31]);
-  terminal_writestring(" Exception. System Halted!\n");
+  virtualterminal_writestring(0,exception_messages[31]);
+  virtualterminal_writestring(0," Exception. System Halted!\n");
   asm volatile ("cli");
   asm volatile ("hlt");
 }
