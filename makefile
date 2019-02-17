@@ -26,6 +26,7 @@ OBJ = \
 	$(DIR_ISR)isrs.o \
 	$(DIR_UTILITY)system.o \
 	$(DIR_TERMINAL)terminal.o \
+	$(DIR_TERMINAL)terminal_buffer.o \
 	$(DIR_TERMINAL)virtualterminal.o \
 	kernel.o \
 

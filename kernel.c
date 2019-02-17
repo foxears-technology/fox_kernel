@@ -6,18 +6,14 @@
 int kernel_main()
 {
   virtualterminal_initialize();
-  terminal_initialize();
   virtualterminal_writestring(1, "virtual terminals initialized\n");
-  virtualterminal_display(1);
 
   idt_install();
   virtualterminal_writestring(1, "IDT installed\n");
-  virtualterminal_display(1);
 
   virtualterminal_writestring(0, "Hello World!\n");
   virtualterminal_newline(0);
   virtualterminal_writestring(0, "You are welcome");
-  virtualterminal_display(0);
 
 
   virtualterminal_setcolor(0, vga_entry_color(VGA_COLOR_LIGHT_CYAN, VGA_COLOR_BROWN));
@@ -33,7 +29,6 @@ int kernel_main()
   virtualterminal_setcursor(0, 10,13);
   virtualterminal_writestring(0, "                  ");
   virtualterminal_newline(0);
-  virtualterminal_display(0);
 
   while(1) {
     asm volatile ("hlt");
