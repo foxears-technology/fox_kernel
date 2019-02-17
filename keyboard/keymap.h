@@ -1,48 +1,87 @@
 #ifndef __KEYMAP_H
 #define __KEYMAP_H
 
-static unsigned char key_fr[128] =
+static char* key_fr[128] =
 {
-  0,  27,
-  '1', '2', '3', '4', '5', '6', '7', '8',	'9', '0',
-  '-', '=',
-  '\b',	    /* Backspace */
-  '\t',			/* Tab */
-  'a', 'z', 'e', 'r',	't', 'y', 'u', 'i', 'o', 'p', '^', '$',
-  '\n',	    /* Enter key */
-  0,			  /* 29   - Control */
-  'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',	/* 39 */
-  '\'', '`',
-  0,		    /* Left shift */
-  '\\', 'w', 'x', 'c', 'v', 'b', 'n',			/* 49 */
-  ',', ';', ':', '!',
-  0,				/* Right shift */
-  '*',
-  0,	   /* Alt */
-  ' ',	 /* Space bar */
-  0,	   /* Caps lock */
-  0,	   /* 59 - F1 key ... > */
-  0,   0,   0,   0,   0,   0,   0,   0,
-  0,	   /* < ... F10 */
-  0,	   /* 69 - Num lock*/
-  0,	   /* Scroll Lock */
-  0,	   /* Home key */
-  0,	   /* Up Arrow */
-  0,	   /* Page Up */
-  '-',
-  0,	   /* Left Arrow */
-  0,
-  0,	   /* Right Arrow */
-  '+',
-  0,	   /* 79 - End key*/
-  0,	   /* Down Arrow */
-  0,	   /* Page Down */
-  0,	   /* Insert Key */
-  0,	   /* Delete Key */
-  0,   0,   0,
-  0,	   /* F11 Key */
-  0,	   /* F12 Key */
-  0,	   /* All other keys are undefined */
+  "k0",
+  "escape",       /* Escape */
+  "&", "é", "\"", "'", "(", "-", "è", "_",	"ç", "à",
+  "-", "=",
+  "backspace",	    /* Backspace */
+  "tab",			/* Tab */
+  "a", "z", "e", "r",	"t", "y", "u", "i", "o", "p", "^", "$",
+  "enter",	    /* Enter key */
+  "ctrl",			  /* 29   - Control */
+  "q", "s", "d", "f", "g", "h", "j", "k", "l", "m",	/* 39 */
+  "ù", "`",
+  "left shift",		    /* Left shift */
+  "*", "w", "x", "c", "v", "b", "n",			/* 49 */
+  ",", ";", ":", "!",
+  "right shift",				/* Right shift */
+  "*",
+  "alt",	   /* Alt */
+  "spacebar",	 /* Space bar */
+  "caps locks",	   /* Caps lock */
+  "f1",	   /* 59 - F1 key ... > */
+  "f2",   "f3",   "f4",   "f5",   "f6",   "f7",   "f8",   "f9",
+  "f10",	   /* < ... F10 */
+  "num lock",	   /* 69 - Num lock*/
+  "scroll lock",	   /* Scroll Lock */
+  "home",	   /* Home key */
+  "up arrow",	   /* Up Arrow */
+  "pg up",	   /* Page Up */
+  "-",
+  "left arrow",	   /* Left Arrow */
+  "k76",
+  "right arrow",	   /* Right Arrow */
+  "+",
+  "end",	   /* 79 - End key*/
+  "down arrow",	   /* Down Arrow */
+  "pg down",	   /* Page Down */
+  "insert",	   /* Insert Key */
+  "delete",	   /* Delete Key */
+  "k84",   "k85",   "<",
+  "f11",	   /* F11 Key */
+  "f12",	   /* F12 Key */
+  "k89",	   /* All other keys are undefined */
+  "k90",
+  "k91",
+  "k92",
+  "k93",
+  "k94",
+  "k95",
+  "k96",
+  "k97",
+  "k98",
+  "k99",
+  "k100",
+  "k101",
+  "k102",
+  "k103",
+  "k104",
+  "k105",
+  "k106",
+  "k107",
+  "k108",
+  "k109",
+  "k110",
+  "k111",
+  "k112",
+  "k113",
+  "k114",
+  "k115",
+  "k116",
+  "k117",
+  "k118",
+  "k119",
+  "k120",
+  "k121",
+  "k122",
+  "k123",
+  "k124",
+  "k125",
+  "k126",
+  "k127"
 };
 
 #endif /* __KEYBOARD_H */
